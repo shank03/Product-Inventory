@@ -41,6 +41,24 @@ func main() {
 		return c.JSON(http.StatusOK, product)
 	})
 
+	e.POST("/product", func(c echo.Context) error {
+		productBody := new(ProductDto)
+		if err := c.Bind(productBody); err != nil {
+			return c.String(http.StatusBadRequest, "Invalid product body")
+		}
+
+		product := Product{
+			ID:   len(productList) + 1, // auto generate ID
+			Name: productBody.Name,
+			Type: productBody.Type,
+		}
+
+		// Insert Product
+		productList[product.ID] = product
+		inventory[product.Type].Products[product.ID] = product
+
+		return c.JSON(http.StatusOK, productList[product.ID])
+	})
 
 	e.GET("/inventory", func(c echo.Context) error {
 		paramInventorytype := c.QueryParam("type")
