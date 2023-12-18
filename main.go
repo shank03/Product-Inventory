@@ -13,6 +13,33 @@ import (
 var productList = map[int]Product{}
 var inventory = map[ProductType]Inventory{}
 
+func main() {
+	e := echo.New()
+
+	e.GET("/products", func(c echo.Context) error {
+		paramProductId := c.QueryParam("id")
+
+		if len(paramProductId) == 0 {
+			return c.JSON(http.StatusOK, productList)
+		}
+
+		prodId, err := strconv.Atoi(paramProductId)
+		if err != nil {
+			return c.String(http.StatusBadRequest, "Invalid product ID")
+		}
+
+		product, ok := productList[prodId]
+		if !ok {
+			return c.JSON(http.StatusNoContent, "Product not found")
+		}
+
+		return c.JSON(http.StatusOK, product)
+	})
+
+
+	e.Logger.Fatal(e.Start(":1323"))
+}
+
 func init() {
 	// populate product list
 	productList[1] = Product{
@@ -62,22 +89,4 @@ func init() {
 			7: productList[7],
 		},
 	}
-}
-
-func main() {
-	e := echo.New()
-	e.GET("/product/:id", func(c echo.Context) error {
-		paramProductId := c.Param("id")
-
-		_, err := strconv.Atoi(paramProductId)
-		if err != nil {
-			return c.NoContent(http.StatusInternalServerError)
-		}
-
-		return c.String(http.StatusOK, paramProductId)
-	})
-	e.GET("/product", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
 }
