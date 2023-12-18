@@ -10,26 +10,26 @@ import (
 // Fetch the product - id / list of ids
 // insert the product - product schema - auto generate ID
 
-type Type int
+type ProductType int
 
 const (
-	food   Type = 0
-	drinks Type = 1
-	utils  Type = 2
+	food   ProductType = 0
+	drinks ProductType = 1
+	utils  ProductType = 2
 )
 
 type Inventory struct {
-	Type Type
+	Type ProductType
 	IDs  map[int]Product
 }
 
 type Product struct {
 	ID   int
 	Name string
-	Type Type
+	Type ProductType
 }
 
-var inventory = map[Type]Inventory{}
+var inventory = map[ProductType]Inventory{}
 
 func main() {
 	e := echo.New()
