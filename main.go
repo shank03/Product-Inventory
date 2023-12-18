@@ -46,7 +46,12 @@ func main() {
 		paramInventorytype := c.QueryParam("type")
 
 		if len(paramInventorytype) == 0 {
-			return c.JSON(http.StatusOK, inventory)
+			inventoryItems := []Inventory{}
+			for _, v := range inventory {
+				inventoryItems = append(inventoryItems, v)
+			}
+
+			return c.JSON(http.StatusOK, inventoryItems)
 		}
 
 		inventoryType, err := strconv.Atoi(paramInventorytype)
