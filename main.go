@@ -67,23 +67,23 @@ func init() {
 		Name: "Coke",
 		Type: drinks,
 	}
-	productList[3] = Product{
-		ID:   3,
+	productList[2] = Product{
+		ID:   2,
 		Name: "Sprite",
 		Type: drinks,
 	}
-	productList[4] = Product{
-		ID:   4,
+	productList[3] = Product{
+		ID:   3,
 		Name: "Lays",
 		Type: food,
 	}
-	productList[6] = Product{
-		ID:   6,
+	productList[4] = Product{
+		ID:   4,
 		Name: "Cheetos",
 		Type: food,
 	}
-	productList[7] = Product{
-		ID:   7,
+	productList[5] = Product{
+		ID:   5,
 		Name: "Toilet Paper",
 		Type: utils,
 	}
@@ -91,22 +91,22 @@ func init() {
 	// populate inventory
 	inventory[drinks] = Inventory{
 		Type: drinks,
-		IDs: map[int]Product{
+		Products: map[int]Product{
 			1: productList[1],
-			3: productList[3],
+			2: productList[2],
 		},
 	}
 	inventory[food] = Inventory{
 		Type: food,
-		IDs: map[int]Product{
+		Products: map[int]Product{
+			3: productList[3],
 			4: productList[4],
-			6: productList[6],
 		},
 	}
 	inventory[utils] = Inventory{
 		Type: utils,
-		IDs: map[int]Product{
-			7: productList[7],
+		Products: map[int]Product{
+			5: productList[5],
 		},
 	}
 }

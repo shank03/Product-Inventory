@@ -15,8 +15,8 @@ var toType = map[int]ProductType{
 }
 
 type Inventory struct {
-	Type ProductType     `json:"type"`
-	IDs  map[int]Product `json:"products"`
+	Type     ProductType     `json:"type"`
+	Products map[int]Product `json:"products"`
 }
 
 type Product struct {
