@@ -20,7 +20,12 @@ func main() {
 		paramProductId := c.QueryParam("id")
 
 		if len(paramProductId) == 0 {
-			return c.JSON(http.StatusOK, productList)
+			products := []Product{}
+			for _, v := range productList {
+				products = append(products, v)
+			}
+
+			return c.JSON(http.StatusOK, products)
 		}
 
 		prodId, err := strconv.Atoi(paramProductId)
