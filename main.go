@@ -10,25 +10,6 @@ import (
 // Fetch the product - id / list of ids
 // insert the product - product schema - auto generate ID
 
-type ProductType int
-
-const (
-	food   ProductType = 0
-	drinks ProductType = 1
-	utils  ProductType = 2
-)
-
-type Inventory struct {
-	Type ProductType
-	IDs  map[int]Product
-}
-
-type Product struct {
-	ID   int
-	Name string
-	Type ProductType
-}
-
 var productList = map[int]Product{}
 var inventory = map[ProductType]Inventory{}
 
