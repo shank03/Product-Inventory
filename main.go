@@ -37,6 +37,26 @@ func main() {
 	})
 
 
+	e.GET("/inventory", func(c echo.Context) error {
+		paramInventorytype := c.QueryParam("type")
+
+		if len(paramInventorytype) == 0 {
+			return c.JSON(http.StatusOK, inventory)
+		}
+
+		inventoryType, err := strconv.Atoi(paramInventorytype)
+		if err != nil {
+			return c.String(http.StatusBadRequest, "Invalid inventory type")
+		}
+
+		productType, ok := toType[inventoryType]
+		if !ok {
+			return c.JSON(http.StatusNoContent, "Product type not found")
+		}
+
+		return c.JSON(http.StatusOK, inventory[productType])
+	})
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
 

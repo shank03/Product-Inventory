@@ -8,9 +8,15 @@ const (
 	utils  ProductType = 2
 )
 
+var toType = map[int]ProductType{
+	0: food,
+	1: drinks,
+	2: utils,
+}
+
 type Inventory struct {
-	Type ProductType
-	IDs  map[int]Product
+	Type ProductType     `json:"type"`
+	IDs  map[int]Product `json:"products"`
 }
 
 type Product struct {
